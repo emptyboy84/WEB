@@ -4,28 +4,25 @@ const PORT = 5001;
 
 app.use(express.static(__dirname));
 
-// API 엔드포인트: index.js의 결과를 전달
-app.get('/api/results', (req, res) => {
-  const sum = calculateSum(5, 3);
-  const product = calculateProduct(5, 3);
-})
+// index.js에서 함수 가져오기
+const { calculateSum } = require('./index.js');
 
-//route for index.html
-app.get('/index.html', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-  /*
-  res.json({
-    sum: sum,
-    product: product
-  });*/
-
-//default route
+// 결과를 보여주는 페이지
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.js');
+  const result = calculateSum(5, 3);
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>결과</title>
+    </head>
+    <body>
+        <h1>계산 결과</h1>
+        <p>5 + 3 = <strong>${result}</strong></p>
+    </body>
+    </html>
+  `);
 });
-
-
 
 app.listen(PORT, '127.0.0.1', () => {
   console.log(`Server running at http://127.0.0.1:${PORT}/`);

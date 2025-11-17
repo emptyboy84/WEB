@@ -1,7 +1,9 @@
-const main = () => {
-	const num = 10;
+// index.js
+function calculateSum(a, b) {
+  return a + b;
+}
 
-      return num;
-};
+const result = calculateSum(5, 3);
+console.log('결과:', result);
 
-module.exports ={ main};
+module.exports = { calculateSum };
